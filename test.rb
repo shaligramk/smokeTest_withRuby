@@ -1,13 +1,15 @@
 require 'rubygems'
 require 'watir-webdriver'
+# require 'phantomjs'
 
-b = Watir::Browser.new :chrome
+browser = Watir::Browser.new :chrome
 
-b.goto 'https://stage-demo.chaucercloud.com'
+browser.goto "https://stage-demo.chaucercloud.com"
+puts "Page title is #{browser.title}"
 
-b.text_field(:id => 'username').set 'metrodigi'
-b.text_field(:id => 'password').set 'sk00by'
-b.button(:name => 'button').click
+browser.text_field(:id => 'username').set 'admin'
+browser.text_field(:id => 'password').set 'books'
+browser.button(:class => 'btn-default').click
 
-puts "Page title is #{driver.title}"
-b.close
+puts "Page title is #{browser.title}"
+browser.close
