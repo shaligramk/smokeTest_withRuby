@@ -11,14 +11,14 @@ browser = Watir::Browser.new :chrome
 
 #Loading the Staging Environment
 browser.goto "https://stage-demo.chaucercloud.com"
-assert(browser.title.include?("Chaucer"))
+puts browser.title
 
 #Username and password input fields identification and data entered
 browser.text_field(:id => 'username').set 'admin'
 browser.text_field(:id => 'password').set 'books'
 browser.button(:class => 'btn-default').click
 
-assert(browser.title(:text, 'Projects').exists?)
+puts browser.title
 browser.screenshot.save 'project_tracker.png'
 
 browser.button(:class => 'newProject').click
