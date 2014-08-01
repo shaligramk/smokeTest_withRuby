@@ -48,7 +48,7 @@ browser.text_field(:id => 'jform_publication_authors').set 'Test Author'
 
 browser.link(:id => 'bookTabAhrefID_8').click
 
-browser.file_field(:class, "theFileInput").set("/Users/shawn/Desktop/FE_Automation/watir/cover_pdf.png")
+browser.file_field(:class, "theFileInput").set("/Users/shawn/Desktop/FE_Automation/watir/test_data/cover_pdf.png")
 
 # # browser.file_field(:id, "upload8_browse").set("/Users/shawn/Desktop/FE_Automation/watir/gettysburg.pdf")
 
