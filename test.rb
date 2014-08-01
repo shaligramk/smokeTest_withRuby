@@ -11,18 +11,33 @@ browser = Watir::Browser.new :chrome
 
 #Loading the Staging Environment
 browser.goto "https://stage-demo.chaucercloud.com"
-puts browser.title
+
+if browser.title.include?("Chaucer")
+    puts "Login Form Found!"
+  else
+    puts "Test failed!"
+  end
 
 #Username and password input fields identification and data entered
 browser.text_field(:id => 'username').set 'admin'
 browser.text_field(:id => 'password').set 'books'
 browser.button(:class => 'btn-default').click
 
-puts browser.title
-browser.screenshot.save 'project_tracker.png'
+expect(browser.title.include?("Projects")).to be_true
+
+if browser.title.include?("Projects")
+    puts "On the Project Tracker!"
+  else
+    puts "Test failed!"
+end
 
 browser.button(:class => 'newProject').click
-browser.screenshot.save 'create_new.png'
+
+if browser.text.include?("Start a New Book Project")
+    puts "Create New Project Page!"
+  else
+    puts "Test failed!"
+end
 
 browser.checkbox(:id => 'bookTypeSelection8').set 
 browser.select_list(:name => 'layoutOption').select 'Import Existing Layout'
