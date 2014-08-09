@@ -4,6 +4,7 @@
 
 require 'rspec'
 require 'watir-webdriver'
+require 'phantomjs'
 
 describe "Chaucer Login" do
 	it "should display login page" do
@@ -11,14 +12,13 @@ describe "Chaucer Login" do
 		@browser.goto("https://stage-demo.chaucercloud.com")
 		@browser.text_field(:id => 'username').set 'admin'
 		@browser.text_field(:id => 'password').set 'books'
-		@browser.title.should == "Chaucer"
+		expect(@browser.title).to eq('Chaucer')
 		@browser.button(:class => 'btn-default').click
 
 	end
 
 	it "should take you to the Project Tracker" do
-		@browser.title.should == "Projects"
-		@browser.button(:class => 'newProject').click
+		browser.button(:class => 'newProject').click
 	end
 
 	it "Edit Project Details page" do
@@ -30,7 +30,7 @@ describe "Chaucer Login" do
 		@browser.file_field(:class, "theFileInput").set("/Users/shawn/Desktop/FE_Automation/watir/test_data/cover_pdf.png")
 		@browser.file_field(:id, "upload8_browse").set("/Users/shawn/Desktop/FE_Automation/watir/gettysburg.pdf")
 		@browser.driver.manage.timeouts.implicit_wait = 5
-		@browser.link(:id => 'bookTabAhrefID_8').click
+		# @browser.link(:id => 'bookTabAhrefID_8').click
 		@browser.close
 	end
 end
