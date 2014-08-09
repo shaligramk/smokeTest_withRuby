@@ -1,18 +1,18 @@
 # Author: Shawn Shaligram
-# Last Updated: August 7, 2014
+# Last Updated: August 8, 2014
 # Regression Test with Watir 
 
 require 'rspec'
-require 'watir-webdriver'
-require 'phantomjs'
+require 'selenium-webdriver'
 
 describe "Chaucer Login" do
 	it "should display login page" do
-		@browser = Watir::Browser.new :chrome
-		@browser.goto("https://stage-demo.chaucercloud.com")
-		@browser.text_field(:id => 'username').set 'admin'
-		@browser.text_field(:id => 'password').set 'books'
+		@browser = Selenium::WebDriver.for :phantomjs
+		@browser.manage.window.resize_to(1440, 850) # set browser size.
+		@browser.get "https://stage-demo.chaucercloud.com"
 		expect(@browser.title).to eq('Chaucer')
+		@browser.find_element(:id => 'username').send_keys 'admin'
+		@browser.find_element(:id => 'password').send_keys 'books'
 		@browser.button(:class => 'btn-default').click
 
 	end
