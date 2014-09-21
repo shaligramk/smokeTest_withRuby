@@ -25,9 +25,9 @@ run do
     @driver.get(@base_url)
     puts @driver.title
     @driver.find_element(:id, "username").clear
-    @driver.find_element(:id, "username").send_keys "sshaligram@metrodigi.com"
+    @driver.find_element(:id, "username").send_keys ""
     @driver.find_element(:id, "password").clear
-    @driver.find_element(:id, "password").send_keys "C4nt3rbury"
+    @driver.find_element(:id, "password").send_keys ""
     @driver.find_element(:class, "ladda-button").click
     puts @driver.title
 end
