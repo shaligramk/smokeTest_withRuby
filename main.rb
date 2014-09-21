@@ -6,7 +6,8 @@ require "selenium-webdriver"
 require "rspec/expectations"
 
 def setup
-  @driver = Selenium::WebDriver.for :chrome
+  # @driver = Selenium::WebDriver.for :chrome
+  @driver = Selenium::WebDriver.for :remote, url: 'http://localhost:8001'
   @base_url = "https://enterprise.chaucercloud.com"
   @driver.manage.timeouts.implicit_wait = 5
 end
@@ -29,5 +30,5 @@ run do
     @driver.find_element(:id, "password").clear
     @driver.find_element(:id, "password").send_keys ""
     @driver.find_element(:class, "ladda-button").click
-    puts @driver.title
+   	puts @driver.title
 end
