@@ -1,63 +1,33 @@
 # Author: Shawn Shaligram
-# Last Updated: August 8, 2014
-# Smoke Test with Selenium-Webdriver 
+# Last Updated: September 20, 2014
+# Smoke Test with Selenium-Webdriver using Ruby Bindings
 
 require "selenium-webdriver"
+require "rspec/expectations"
 
-browser = Selenium::WebDriver.for :chrome
-browser.manage.window.maximize
-browser.navigate.to "https://stage-demo.chaucercloud.com"
-puts browser.title
+def setup
+  @driver = Selenium::WebDriver.for :chrome
+  @base_url = "https://enterprise.chaucercloud.com"
+  @driver.manage.timeouts.implicit_wait = 5
+end
 
-#Typing the UserName
-UserName = browser.find_element(:id, "username")
-UserName.send_keys "admin"
+def teardown
+  @driver.quit
+end
 
-#Typing the Password
-UserName = browser.find_element(:id, "password")
-UserName.send_keys "books"
+def run
+  setup
+  yield
+  teardown
+end
 
-#Clicking on the Submit Button
-SubmitButton = browser.find_element(:class, "btn-default")
-SubmitButton.click
-
-#Asserting whether the login has been succesfull 
-SuccessMessage = browser.find_element(:css, "h1")
-"Project Tracker".eql? SuccessMessage.text
-puts "Login Succesfull. Currently on the Project Tracker"
-
-puts browser.title
-
-#Clicking on the New Project Button
-NewProject = browser.find_element(:class, "newProject")
-NewProject.click
-
-#Asserting whether the login has been succesfull 
-UploadProject = browser.find_element(:css, "h1")
-"Start a New Book Project".eql? UploadProject.text
-puts "Upload Project into a Layout Source Type"
-
-puts browser.title
-
-#Click on Reflowable Layout checkbox
-reflowableLayout = browser.find_element(:id, "bookTypeSelection8")
-reflowableLayout.click
-
-#Select Dropdown Value "Import Existing Layout"
-#browser.find_element(:id, "bookTypeSelection8").find_element(:css,"option[value='Import Existing Layout']").click
-
-#Entering the Publication Name
-publicationName = browser.find_element(:id, "jform_publication_name")
-publicationName.send_keys "Pages From Gettysburg"
-
-#Entering the Author Name
-publicationAuthor = browser.find_element(:id, "jform_publication_authors")
-publicationAuthor.send_keys "Test Author"
-
-#Entering the Publisher Name
-publisherName = browser.find_element(:id, "jform_publication_publisher")
-publisherName.send_keys "Test Publisher"
-
-#Quitting the browser
-browser.quit
-
+run do 
+    @driver.get(@base_url)
+    puts @driver.title
+    @driver.find_element(:id, "username").clear
+    @driver.find_element(:id, "username").send_keys "sshaligram@metrodigi.com"
+    @driver.find_element(:id, "password").clear
+    @driver.find_element(:id, "password").send_keys "C4nt3rbury"
+    @driver.find_element(:class, "ladda-button").click
+    puts @driver.title
+end
