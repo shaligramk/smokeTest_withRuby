@@ -4,11 +4,15 @@
 
 require "selenium-webdriver"
 require "rspec/expectations"
+require "yaml"
+
 
 def setup
   # @driver = Selenium::WebDriver.for :chrome
+  config = YAML.load_file("config.yml")
   @driver = Selenium::WebDriver.for :remote, url: 'http://localhost:8001'
   @base_url = "https://enterprise.chaucercloud.com"
+  @driver.manage.delete_all_cookies
   @driver.manage.timeouts.implicit_wait = 5
 end
 
@@ -25,10 +29,10 @@ end
 run do 
     @driver.get(@base_url)
     puts @driver.title
+    @driver.save_screenshot('screenshots/log_in.png')
     @driver.find_element(:id, "username").clear
     @driver.find_element(:id, "username").send_keys ""
     @driver.find_element(:id, "password").clear
     @driver.find_element(:id, "password").send_keys ""
     @driver.find_element(:class, "ladda-button").click
-   	puts @driver.title
 end

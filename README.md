@@ -13,8 +13,10 @@ Usage
 
 3. cd into your project dir
 
-4. To run, type 'rspec filename.rb'
+4  run 'phantomjs --webdriver=8001' to start the Ghostdriver
+
+4. To run, type 'ruby filename.rb'
 
 License
 ====================
-MD Regression Test is released under the [MIT License](http://opensource.org/licenses/MIT).
+WebDriver + Ruby Test is released under the [MIT License](http://opensource.org/licenses/MIT).
