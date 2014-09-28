@@ -7,7 +7,7 @@ This is my sandbox to write tests in WebDriver with Ruby Bindings and Rspec as m
 Usage
 ====================
 1. Clone project by running
-	`clone https://github.com/shaligramk/Regression_with_Watir.git`
+	`clone https://github.com/shaligramk/smokeTest_withRuby.git`
 
 2. install gem install selenium-webdriver through Terminal
 
