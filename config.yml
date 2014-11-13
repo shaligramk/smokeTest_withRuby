@@ -1,8 +1,7 @@
+# Production
 Enterprise:
 url: "https://enterprise.chaucercloud.com"
 
-# QA:
-# url: "gamma.google.com"
 
-# Prod:
-# url: "google.com"
+# Staging
+url: "https://stage.chaucercloud.com"
